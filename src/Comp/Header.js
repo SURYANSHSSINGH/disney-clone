@@ -7,95 +7,95 @@ import { selectUserName, selectUserPhoto, setUserLoginDetails, setSignOutState }
 
 const Header = (props) => {
 
-    const dispatch = useDispatch();
-    const history = useHistory();
-    const userName = useSelector(selectUserName);
-    const userPhoto = useSelector(selectUserPhoto);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const userName = useSelector(selectUserName);
+  const userPhoto = useSelector(selectUserPhoto);
 
-    useEffect(() => {
-        auth.onAuthStateChanged(async (user) => {
-          if (user) {
-            setUser(user);
-            history.push("/home");
-          }
-        });
-      }, [userName]);
+  useEffect(() => {
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        setUser(user);
+        history.push("/home");
+      }
+    });
+  }, [userName]);
 
-    const handleAuth = () => {
-        if (!userName) {
-        auth.signInWithPopup(provider).then((result) => {
-            setUser(result.user);
-            console.log(result);
-        }).catch((error) => {
-            alert(error.message);
-        });
+  const handleAuth = () => {
+    if (!userName) {
+      auth.signInWithPopup(provider).then((result) => {
+        setUser(result.user);
+        console.log(result);
+      }).catch((error) => {
+        alert(error.message);
+      });
     }
     else if (userName) {
-        auth
-          .signOut()
-          .then(() => {
-            dispatch(setSignOutState());
-            history.push("/");
-          })
-          .catch((err) => alert(err.message));
-      }
+      auth
+        .signOut()
+        .then(() => {
+          dispatch(setSignOutState());
+          history.push("/");
+        })
+        .catch((err) => alert(err.message));
+    }
 
-    };
+  };
 
-    const setUser = (user) => {
-        dispatch(
-          setUserLoginDetails({
-            name: user.displayName,
-            email: user.email,
-            photo: user.photoURL,
-          })
-        );
-      };
-    return (
-        <Nav>
-            <Logo>
-                <img src="/images/logo.svg" alt="" />
-            </Logo>
-            {
-                !userName ? (<Signin onClick={handleAuth}>Signin</Signin>)
-                    : (
-                    <>
-                        <Menu>
-                            <a href="/home">
-                                <img src='/images/home-icon.svg' alt="HOME" />
-                                <span>HOME</span>
-                            </a>
-                            <a>
-                                <img src='/images/search-icon.svg' alt="SEARCH" />
-                                <span>SEARCH</span>
-                            </a>
-                            <a>
-                                <img src='/images/watchlist-icon.svg' alt="WATCHLIST" />
-                                <span>WATCHLIST</span>
-                            </a>
-                            <a>
-                                <img src='/images/original-icon.svg' alt="ORIGINALS" />
-                                <span>ORIGINALS</span>
-                            </a>
-                            <a>
-                                <img src='/images/movie-icon.svg' alt="MOVIES" />
-                                <span>MOVIES</span>
-                            </a>
-                            <a>
-                                <img src='/images/series-icon.svg' alt="SERIES" />
-                                <span>SERIES</span>
-                            </a>
-                        </Menu>
-                        <SignOut>
-                        <UserImg src={userPhoto} alt={userName} />
-                        <DropDown>
-              <span onClick={handleAuth}>Sign out</span>
-            </DropDown>
-                        </SignOut>
-                    </>
-                     ) }
-        </Nav>
+  const setUser = (user) => {
+    dispatch(
+      setUserLoginDetails({
+        name: user.displayName,
+        email: user.email,
+        photo: user.photoURL,
+      })
     );
+  };
+  return (
+    <Nav>
+      <Logo>
+        <img src="/images/logo.svg" alt="" />
+      </Logo>
+      {
+        !userName ? (<Signin onClick={handleAuth}>Signin</Signin>)
+          : (
+            <>
+              <Menu>
+                <a href="/home">
+                  <img src='/images/home-icon.svg' alt="HOME" />
+                  <span>HOME</span>
+                </a>
+                <a>
+                  <img src='/images/search-icon.svg' alt="SEARCH" />
+                  <span>SEARCH</span>
+                </a>
+                <a>
+                  <img src='/images/watchlist-icon.svg' alt="WATCHLIST" />
+                  <span>WATCHLIST</span>
+                </a>
+                <a>
+                  <img src='/images/original-icon.svg' alt="ORIGINALS" />
+                  <span>ORIGINALS</span>
+                </a>
+                <a>
+                  <img src='/images/movie-icon.svg' alt="MOVIES" />
+                  <span>MOVIES</span>
+                </a>
+                <a>
+                  <img src='/images/series-icon.svg' alt="SERIES" />
+                  <span>SERIES</span>
+                </a>
+              </Menu>
+              <SignOut>
+                <UserImg src={userPhoto} alt={userName} />
+                <DropDown>
+                  <span onClick={handleAuth}>Sign out</span>
+                </DropDown>
+              </SignOut>
+            </>
+          )}
+    </Nav>
+  );
 };
 
 const Nav = styled.nav`
