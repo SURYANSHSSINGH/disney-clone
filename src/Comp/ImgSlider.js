@@ -39,7 +39,7 @@ const ImgSlider = (props) => {
 };
 
 const Carousel = styled(Slider)`
-margin-top :20px;
+margin-top :0px;
 
 & > button{
     opacity:0;
@@ -66,10 +66,10 @@ li.slick-active button:before{
     overflow:initial;
 }
 .slick-prev{
-    left: --75px;
+    left: -75px;
 }
 .slick-next{
-    left: --75px;
+    left: -75px;
 }
 `;
 

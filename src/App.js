@@ -3,6 +3,7 @@ import './App.css';
 import Login from "./Comp/Login"
 import Header from "./Comp/Header";
 import Home from "./Comp/Home";
+import Detail from './Comp/Detail';
 
 function App() {
   return (
@@ -16,7 +17,9 @@ function App() {
           <Route path="/home">
             <Home/>
           </Route>
-
+          <Route path="/detail/:id" >
+            <Detail/>
+          </Route>
         </Switch>
       </Router>
 

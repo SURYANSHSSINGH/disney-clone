@@ -1,37 +1,25 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useSelector } from "react-redux";
+import { selectOriginal } from '../features/movies/movieSlice';
 
 
 const Originals = (props)=>{
+  const movies = useSelector(selectOriginal);
+  console.log(movies);
     return (
-    <Container>
-        <h4>Originals</h4>
-        <Content>
-       <Wrap>
-           <Link to='/'>
-        <img src="/images/falcon.jpeg" alt="" />
-        </Link>
-      </Wrap>
-      <Wrap>
-           <Link to='/'>
-        <img src="/images/chhichhore.png" alt="" />
-        </Link>
-      </Wrap>
-      <Wrap>
-           <Link to='/'>
-        <img src="/images/mandalorian.jpg" alt="" />
-        </Link>
-      </Wrap>
-      <Wrap>
-           <Link to='/'>
-        <img src="/images/Kabir-singh.jpg" alt="" />
-        </Link>
-      </Wrap>
-      <Wrap>
-           <Link to='/'>
-        <img src="/images/frozen.jpg" alt="" />
-        </Link>
-      </Wrap>
+      <Container>
+      <h4>Originals</h4>
+      <Content>
+        {movies &&
+          movies.map((movie, key) => (
+            <Wrap key={key}>
+              {movie.id}
+              <Link to={`/detail/` + movie.id}>
+                <img src={movie.cardImg} alt={movie.title} />
+              </Link>
+            </Wrap>
+          ))}
       </Content>
     </Container>
     )
@@ -47,7 +35,7 @@ const Content = styled.div`
 display:grid;
 grid-gap:25px;
 gap:25px;
-grid-template-columns: repeat(5,minmax(0,1fr));
+grid-template-columns: repeat(4,minmax(0,1fr));
 
 @media (max-width: 768px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));

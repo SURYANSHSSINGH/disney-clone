@@ -42,8 +42,7 @@ const Home = (props) => {
             break;
         }
       });
-console.log(recommends);
-console.log(trending);
+      
       dispatch(
         setMovies({
           recommend: recommends,
