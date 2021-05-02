@@ -66,10 +66,10 @@ li.slick-active button:before{
     overflow:initial;
 }
 .slick-prev{
-    left: -75px;
+    left: --80px;
 }
 .slick-next{
-    left: -75px;
+    left: --80px;
 }
 `;
 
