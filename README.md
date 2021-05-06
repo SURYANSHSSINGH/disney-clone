@@ -1,3 +1,12 @@
+# Live Demo
+
+https://disney-clone-8986e.web.app/
+
+# Stack Used
+1-VS Code
+2-Reactjs
+3-Firebase
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
